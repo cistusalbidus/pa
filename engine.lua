@@ -18,6 +18,9 @@ local max = math.max
 
 local DT_SPEED_INCREASE = 15 * 60 -- frames it takes to increase the speed level by 1
 
+p1Score = 0
+p2Score = 0
+
 -- Represents the full panel stack for one player
 Stack =
   class(
@@ -184,6 +187,7 @@ Stack =
 
     s.NCOLORS = s.NCOLORS or 5
     s.score = 0 -- der skore
+    p1Score = s.score
     s.chain_counter = 0 -- how high is the current chain (starts at 2)
 
     s.panels_in_top_row = false -- boolean, for losing the game
@@ -509,6 +513,7 @@ function Stack.rollbackCopy(source, other)
   other.stop_time = source.stop_time
   other.pre_stop_time = source.pre_stop_time
   other.score = source.score
+  p2Score = other.score
   other.chain_counter = source.chain_counter
   other.n_active_panels = source.n_active_panels
   other.n_prev_active_panels = source.n_prev_active_panels
@@ -1300,6 +1305,10 @@ function Stack.shouldDropGarbage(self)
   end
 end
 
+function ScoreDifference()
+  scoreDifference = math.abs(p1Score-p2Score)
+end
+
 -- One run of the engine routine.
 function Stack.simulate(self)
   -- Don't run the main logic if the player has simulated past one of the game overs or the time attack time
@@ -1350,6 +1359,9 @@ function Stack.simulate(self)
           -- no gameover because it can't return otherwise, exit is taken care of by puzzle_failed
         end
       else
+        if scoreDifference>=10000 and p1Score<p2Score then
+          self:set_game_over()
+        end
         if self.panels_in_top_row then
           self.health = self.health - 1
           if self.health < 1 and self.shake_time < 1 then

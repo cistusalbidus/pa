@@ -78,16 +78,21 @@ SCOREMODE_PDP64 = 2 -- currently not used
 
 -- score lookup tables
 score_combo_PdP64 = {} --size 40
-score_combo_TA = {  0,    0,    0,   20,   30,
-                   50,   60,   70,   80,  100,
-                  140,  170,  210,  250,  290,
-                  340,  390,  440,  490,  550,
-                  610,  680,  750,  820,  900,
-                  980, 1060, 1150, 1240, 1330, [0]=0}
+score_combo_TA = {  0,    0,    0,   90,   150,
+                   450,   570,   690,   810,  930,
+                  1200,  1350,  1500,  1650,  2100,
+                  2280,  2550,  2910,  3360,  3900,
+                  4530,  5250,  6060,  6960,  7950,
+                  9030, 10200, 11460, 12810, 14250, [0]=0}
 
-score_chain_TA = {  0,   50,   80,  150,  300,
-                  400,  500,  700,  900, 1100,
-                 1300, 1500, 1800, [0]=0}
+-- this only goes up to 30 combo, increasing the number of elements in the table may fuck things over and i would have no clue how to fix it. good luck to whomever is seeing this
+
+score_chain_TA = {  0,   50,   100,  150,  200,
+                  250,  300,  350,  400, 450,
+                 500, 550, 600, [0]=0}
+
+--no clue how to get rid of the bonus pts mechanic
+--update 11/29: found bonus points method, commented out. may or may not break game
 
 GFX_SCALE = 3
 

@@ -515,6 +515,8 @@ function Stack:updateScoreWithChain()
   end
 end
 
+--bookmark for scores. this is how the scores are calculated in the game for every mode
+
 function Stack:clearChainingFlags()
   for row = 1, self.height do
     for column = 1, self.width do

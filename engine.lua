@@ -1361,7 +1361,6 @@ function Stack.simulate(self)
           -- no gameover because it can't return otherwise, exit is taken care of by puzzle_failed
         end
       else
-        end
         if self.panels_in_top_row then
           self.health = self.health - 1
           if self.health < 1 and self.shake_time < 1 then

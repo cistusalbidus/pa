@@ -513,7 +513,7 @@ function Stack.rollbackCopy(source, other)
   other.stop_time = source.stop_time
   other.pre_stop_time = source.pre_stop_time
   other.score = source.score
-  p2Score = other.score
+  p2Score = source.score
   other.chain_counter = source.chain_counter
   other.n_active_panels = source.n_active_panels
   other.n_prev_active_panels = source.n_prev_active_panels
@@ -1305,14 +1305,12 @@ function Stack.shouldDropGarbage(self)
   end
 end
 
-function ScoreDifference()
-  scoreDifference = math.abs(p1Score-p2Score)
-end
 
 -- One run of the engine routine.
 function Stack.simulate(self)
   -- Don't run the main logic if the player has simulated past one of the game overs or the time attack time
   if self:game_ended() == false then
+    scoreDifference = math.abs(p1Score-p2Score)
     self:prep_first_row()
     local panels = self.panels
     local swapped_this_frame = nil
